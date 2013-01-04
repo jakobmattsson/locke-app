@@ -1,12 +1,21 @@
 {
-  "name": "lockeapp",
+  "name": "locke-app",
+  "description": "Web UI for managing centrally stored locke accounts",
   "version": "0.0.1",
+  "author": "Jakob Mattsson <jakob.mattsson@gmail.com> (jakobmattsson.se)",
   "devDependencies": {
     "bucketful": "0.7.3",
     "opra": "0.12.1"
   },
+  "bucketful": {
+    "bucket": "www.lockeapp.com",
+    "opra": {
+      "inline": true,
+      "compress": false
+    }
+  },
   "scripts": {
-    "deploy": "bucketful && rm -rf public/code",
+    "deploy": "bucketful",
     "start": "opra -p 4000 -r public -n public/index.html"
   }
 }
