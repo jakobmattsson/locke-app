@@ -1,0 +1,60 @@
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="nav-collapse collapse">
+        <ul class="nav pull-right">
+          <li><a href="#/login" ng-click="logout()">Log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- <div class="row">
+    <ul class="breadcrumb">
+      <li class="active">Operators</li>
+    </ul>
+  </div> -->
+
+  <div class="row">
+    <div class="span8">
+
+      <h1>Apps</h1>
+
+      <div class="datatables-wrapper">
+        <table class="table table-striped table-hover" style="margin-bottom:0">
+          <thead>
+            <tr>
+              <th style="text-align:left">App name</th>
+              <th style="text-align:left">User count</th>
+              <th style="text-align:left"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="app in apps">
+              <td><b>{{app.name}}</b></td>
+              <td>{{app.userCount}}</td>
+              <td class="center">
+                <button class="btn btn-danger" ng-click="deleteApp(app)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin:12px 0">
+          <button class="btn btn-success" ng-click="createApp()">Create app</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="span4">
+
+      <h1>Account</h1>
+      <button style="display:block;margin-bottom:12px" class="btn" ng-click="changePassword()">Change password</a>
+      <button style="display:block;margin-bottom:12px" class="btn btn-danger" ng-click="deleteAccount()">Delete my account</a>
+
+    </div>
+  </div>
+
+</div>

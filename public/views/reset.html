@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row" style="margin-top: 30px;">
+    <div class="span4 offset4">
+      <div class="login-wrapper rounded">
+        <div class="login-wrapper-inner">
+          <form>
+            <h4>Reset your password</h4>
+            <div style="margin-right:16px;" class="control-group" ng-class="{ error: error }">
+              <label class="control-label" ng-show="error">{{error}}</label>
+              <input type="password" placeholder="New password" style="width:100%;" ng-model="newPassword">
+            </div>
+            <div style="margin-bottom:12px">
+              <button class="btn btn-primary" ng-click="reset()">OK</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row" style="margin-top: 30px;">
+    <div class="span4 offset4">
+      <div class="login-wrapper rounded">
+        <div class="login-wrapper-inner">
+          <form>
+            <h4>Login to Locke</h4>
+            <div style="margin-right:16px;" class="control-group" ng-class="{ error: error }">
+              <label class="control-label" ng-show="error">{{error}}</label>
+              <input type="text" placeholder="Email" style="width:100%;" ng-model="username">
+              <input type="password" placeholder="Password" style="width:100%;" ng-model="password">
+            </div>
+
+            <div style="margin-bottom:12px">
+              <button class="btn btn-primary" ng-click="login()">Log in</button>
+            </div>
+            <div>
+              <a href="#/signup">Sign up instead?</a>
+            </div>
+            <div>
+              <a href="#/forgot">Forgot your password?</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "name": "lockeapp",
+  "version": "0.0.1",
+  "devDependencies": {
+    "bucketful": "0.7.3",
+    "opra": "0.12.1"
+  },
+  "scripts": {
+    "deploy": "bucketful && rm -rf public/code",
+    "start": "opra -p 4000 -r public -n public/index.html"
+  }
+}
