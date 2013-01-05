@@ -1,16 +1,16 @@
-window.ctrlSignup = ($scope, $http) ->
+require('application').defCtrl '/signup', '/views/signup.html', ($scope, $location, backend) ->
 
   $scope.username = ''
   $scope.password = ''
 
   $scope.signup = ->
-    backend.createUser $http, 'locke', $scope.username, $scope.password, (err) ->
+    backend.createUser 'locke', $scope.username, $scope.password, (err) ->
       if err
         $scope.error = err
       else
-        backend.sendValidation $http, 'locke', $scope.username, (err) ->
+        backend.sendValidation 'locke', $scope.username, (err) ->
           if err
             $scope.error = err
           else
             humane.log 'User created. Please go to your inbox and follow the instructions before proceeding', ->
-              window.location = "#/login"
+              $location.path "/login"

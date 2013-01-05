@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "Jakob Mattsson <jakob.mattsson@gmail.com> (jakobmattsson.se)",
   "devDependencies": {
+    "bower": "0.6.5",
     "bucketful": "0.7.3",
     "opra": "0.12.1"
   },
@@ -15,6 +16,7 @@
     }
   },
   "scripts": {
+    "postinstall": "bower install",
     "deploy": "bucketful",
     "start": "opra -p 4000 -r public -n public/index.html"
   }

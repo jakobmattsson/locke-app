@@ -1,13 +1,13 @@
-window.ctrlApps = ($scope, $http) ->
+require('application').defCtrl '/apps', '/views/apps.html', ($scope, backend) ->
 
-  backend.getApps $http, (err, res) ->
+  backend.getApps {}, (err, res) ->
     apps = Object.keys(res.apps)
     $scope.apps = apps.map (app) ->
       name: app
       userCount: res.apps[app].userCount
 
   $scope.logout = ->
-    backend.logout($http)
+    backend.logout()
 
   $scope.deleteAccount = ->
     humane.log("Deleting accounts is not supported at the moment")
@@ -15,13 +15,13 @@ window.ctrlApps = ($scope, $http) ->
   $scope.changePassword = ->
     smoke.prompt 'Enter your current password', (currentPassword) ->
       smoke.prompt 'Enter your new password', (newPassword) ->
-        backend.updatePassword $http, currentPassword, newPassword, (err, res) ->
+        backend.updatePassword currentPassword, newPassword, (err, res) ->
           humane.log(if err? then err.status else 'Password updated')
 
   $scope.createApp = ->
     smoke.prompt 'Enter a name for the new app', (name) ->
       return if !name
-      backend.createApp $http, name, (err, res) ->
+      backend.createApp name, (err, res) ->
         if err
           humane.log err
         else
@@ -38,7 +38,7 @@ window.ctrlApps = ($scope, $http) ->
 
     smoke.prompt 'Repeat your password in order to delete ' + app.name, (password) ->
       return if !password
-      backend.deleteApp $http, password, app.name, (err, res) ->
+      backend.deleteApp password, app.name, (err, res) ->
         if err
           humane.log('Failed to delete app: ' + err)
         else

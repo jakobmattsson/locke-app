@@ -1,19 +1,14 @@
-window.ctrlLogin = ($scope, $http) ->
+require('application').defCtrl '/login', '/views/login.html', ($scope, $location, backend) ->
 
   $scope.showApp = false
   $scope.app = ''
   $scope.username = ''
   $scope.password = ''
 
-  $scope.anotherApp = ->
-    console.log "other!!!"
-    return false
-
   $scope.login = ->
     app = (if $scope.showApp then $scope.app else 'locke')
-    backend.login $http, app, $scope.username, $scope.password, (err) ->
+    backend.login app, $scope.username, $scope.password, (err) ->
       if err
         $scope.error = err
-        $scope.$apply()
       else
-        window.location = if app == 'locke' then "#/apps" else "#/app"
+        $location.path(if app == 'locke' then "/apps" else "/app")

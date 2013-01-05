@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "angular": "d04689f019f8febd8a86839dfb044a49f5737f72",
+    "bootstrap": "2.1.1",
+    "humane-jakobmattsson": "3.0.0",
+    "smoke-jakobmattsson": "50d7cc8d4d6ee8c51e627e5e2be8f89104fd8633",
+    "jquery": "1.8.3"
+  }
+}

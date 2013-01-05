@@ -4,7 +4,7 @@
       <div class="login-wrapper rounded">
         <div class="login-wrapper-inner">
           <form>
-            <h4>Login to Locke</h4>
+            <h4>Login<span ng-show="!showApp"> to Locke</span></h4>
             <div style="margin-right:16px;" class="control-group" ng-class="{ error: error }">
               <label class="control-label" ng-show="error">{{error}}</label>
               <input type="text" placeholder="App" style="width:100%;" ng-model="app" ng-show="showApp">

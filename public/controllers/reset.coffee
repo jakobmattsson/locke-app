@@ -1,9 +1,9 @@
-window.ctrlReset = ($scope, $routeParams, $http) ->
+require('application').defCtrl '/reset/:app/:email/:token', '/views/reset.html', ($scope, $location, $routeParams, backend) ->
 
   $scope.reset = ->
-    backend.resetPassword $http, $routeParams.app, $routeParams.email, $routeParams.token, $scope.newPassword, (err) ->
+    backend.resetPassword $routeParams.app, $routeParams.email, $routeParams.token, $scope.newPassword, (err) ->
       if err
         $scope.error = err
       else
         humane.log 'Password successfully updated', ->
-          window.location = "#/login"
+          $location.path "/login"
