@@ -20,6 +20,9 @@ module.config ($routeProvider) ->
   .when '/reset/:app/:email/:token'
     templateUrl: '/views/reset.html'
     controller: ctrlReset
+  .when '/app'
+    templateUrl: '/views/app.html'
+    controller: ctrlApp
   .when '/apps'
     templateUrl: '/views/apps.html'
     controller: ctrlApps

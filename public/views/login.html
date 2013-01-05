@@ -7,12 +7,16 @@
             <h4>Login to Locke</h4>
             <div style="margin-right:16px;" class="control-group" ng-class="{ error: error }">
               <label class="control-label" ng-show="error">{{error}}</label>
+              <input type="text" placeholder="App" style="width:100%;" ng-model="app" ng-show="showApp">
               <input type="text" placeholder="Email" style="width:100%;" ng-model="username">
               <input type="password" placeholder="Password" style="width:100%;" ng-model="password">
             </div>
 
             <div style="margin-bottom:12px">
               <button class="btn btn-primary" ng-click="login()">Log in</button>
+            </div>
+            <div>
+              <a href="#" onclick="return false" ng-click="showApp=true" ng-show="!showApp">Logging in to another app?</a>
             </div>
             <div>
               <a href="#/signup">Sign up instead?</a>

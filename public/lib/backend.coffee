@@ -6,7 +6,7 @@ exports.connect = (module, lockeClient) ->
   ## =================
   makeBaseAuth = (user, pass) -> 'Basic ' + btoa(user + ':' + pass)
   lockeBaseUrl = if window.location.hostname == 'localapi.localhost' then 'http://localhost:6002' else 'https://locke.herokuapp.com'
-  locke = lockeClient.connectAppWithJQuery 'locke', lockeBaseUrl, jQuery
+  locke = lockeClient.connectAppWithJQuery lockeBaseUrl, jQuery
 
   req = ($http, path, data) ->
     qs = Object.keys(data).map (x) ->
@@ -32,11 +32,12 @@ exports.connect = (module, lockeClient) ->
 
   createApp: ($http, app, callback) ->
     req($http, '/createApp', { email: store.get('auth')?.username, token: store.get('auth')?.password, app: app }).success (res) ->
-      # hantera visa fel annorlunda (tex att appen finns )
-      if res.status == 'App name is already in use'
+      if res.error?
+        if res.error.data == 'App name is already in use'
+          callback('App name is already in use')
+        else
+          internalLogout()
         callback(res.status)
-      else if res.status != 'OK'
-        internalLogout()
       else
         callback(null, res)
     .error (res) ->
@@ -52,7 +53,7 @@ exports.connect = (module, lockeClient) ->
       internalLogout()
 
   updatePassword: ($http, password, newPassword, callback) ->
-    req($http, '/updatePassword', { app: 'locke', email: store.get('auth')?.username, password: password, newPassword: newPassword }).success (res) ->
+    req($http, '/updatePassword', { app: store.get('auth')?.app, email: store.get('auth')?.username, password: password, newPassword: newPassword }).success (res) ->
       if res.error?
         internalLogout()
       else
@@ -108,21 +109,20 @@ exports.connect = (module, lockeClient) ->
   logout: ($http)->
     store.remove('auth')
     req $http, '/closeSession',
-      app: 'locke'
+      app: store.get('auth')?.app
       email: store.get('auth')?.username
       token: store.get('auth')?.password
 
-  login: ($http, username, password, callback) ->
+  login: ($http, app, username, password, callback) ->
     if !username || !password
       setTimeout ->
         callback('Please enter your login details')
       , 1
       return
 
-    locke.authPassword username, password, 86400, (err, data) ->
+    locke.authPassword app, username, password, 86400, (err, data) ->
       return callback('Invalid username') if err? && err.data?.match(/^There is no user/)
       return callback(err.data?.toString()) if err?
-      return callback('Email not confirmed. Check your inbox.') if !data.validated
 
-      store.set 'auth', { username: username, password: data.token }
+      store.set 'auth', { app: app, username: username, password: data.token }
       callback()
