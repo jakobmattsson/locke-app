@@ -1,3 +1,4 @@
+_ = require 'underscore'
 store = require 'store'
 nameify = require 'nameify'
 jsonrpc = require 'jsonrpc-http-browser-client'

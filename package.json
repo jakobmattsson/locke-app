@@ -10,9 +10,11 @@
   },
   "bucketful": {
     "bucket": "www.lockeapp.com",
+    "include": [".code", "views"],
     "opra": {
-      "inline": true,
-      "compress": false
+      "inline": false,
+      "concat": true,
+      "compress": true
     }
   },
   "scripts": {
