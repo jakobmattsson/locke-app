@@ -1,7 +1,3 @@
-# Dra igång följande först (ligger i project/others):
-# java -jar selenium-server-standalone-2.28.0.jar
-
-
 fs = require 'fs'
 wdSync = require 'wd-sync'
 
