@@ -4,14 +4,14 @@
       <div class="login-wrapper rounded">
         <div class="login-wrapper-inner">
           <form>
-            <h4>Sign up for a Locke-account</h4>
-            <div style="margin-right:16px;" class="control-group" ng-class="{ error: error }">
-              <label class="control-label" ng-show="error">{{error}}</label>
-              <input type="text" placeholder="Email" style="width:100%;" ng-model="username">
-              <input type="password" placeholder="Password" style="width:100%;" ng-model="password">
+            <h4 class="spec-title-signup">Sign up for a Locke-account</h4>
+            <div style="margin-right:16px;" class="control-group spec-error" ng-class="{ error: error }">
+              <label class="spec-error control-label" ng-show="error">{{error}}</label>
+              <input class="spec-username" type="text" placeholder="Email" style="width:100%;" ng-model="username">
+              <input class="spec-password" type="password" placeholder="Password" style="width:100%;" ng-model="password">
             </div>
             <div style="margin-bottom:12px">
-              <button class="btn btn-primary" ng-click="signup()">Signup</button>
+              <button class="btn btn-primary spec-signup" ng-click="signup()">Signup</button>
             </div>
             <div>
               <a href="#/login">Back to login</a>

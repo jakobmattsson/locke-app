@@ -65,6 +65,8 @@ module.factory 'backend', newArray '$rootScope', '$timeout', '$location', ($root
     acc
   , {}
 
+  resultObject.whoami = -> store.get('auth')?.email
+
   resultObject.logout = (callback) ->
     store.remove('auth')
     lockeDefaults('closeSession', {}, callback)
@@ -92,12 +94,17 @@ module.factory 'backend', newArray '$rootScope', '$timeout', '$location', ($root
 # Routing
 # =============================================================================
 
-exports.defCtrl = (path, template, controller) ->
+exports.defCtrl = (path, template, resolver, controller) ->
+  if !controller?
+    controller = resolver
+    resolver = null
+
   module.config ($routeProvider) ->
     $routeProvider
     .when path,
       templateUrl: template
       controller: controller
+      resolve: resolver
 
 module.config ($routeProvider) ->
   $routeProvider.otherwise { redirectTo: '/login' }

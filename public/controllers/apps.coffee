@@ -1,10 +1,18 @@
-require('application').defCtrl '/apps', '/views/apps.html', ($scope, backend) ->
+require('application').defCtrl '/apps', '/views/apps.html', {
+  apps: ($q, $location, backend) ->
+    deferred = $q.defer()
+    backend.getApps {}, (err, res) ->
+      if err?
+        $location.path('/login')
+      else
+        deferred.resolve(res.apps)
+    deferred.promise
+}, ($scope, backend, apps) ->
 
-  backend.getApps {}, (err, res) ->
-    apps = Object.keys(res.apps)
-    $scope.apps = apps.map (app) ->
-      name: app
-      userCount: res.apps[app].userCount
+  appsKeys = Object.keys(apps)
+  $scope.apps = appsKeys.map (app) ->
+    name: app
+    userCount: apps[app].userCount
 
   $scope.logout = ->
     backend.logout()

@@ -1,4 +1,16 @@
-require('application').defCtrl '/login', '/views/login.html', ($scope, $location, backend) ->
+require('application').defCtrl '/login', '/views/login.html', {
+
+  mustBeLoggedOut: ($timeout, $q, backend, $location) ->
+    deferred = $q.defer()
+    if backend.whoami()?
+      $location.path('/apps')  ## apps eller app - vilken är startsidan? Bore nog ha en enda adress
+    $timeout ->
+      deferred.resolve(null)
+    deferred.promise
+
+
+
+}, ($scope, $location, backend) ->
 
   $scope.showApp = false
   $scope.app = ''

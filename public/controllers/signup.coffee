@@ -4,13 +4,27 @@ require('application').defCtrl '/signup', '/views/signup.html', ($scope, $locati
   $scope.password = ''
 
   $scope.signup = ->
-    backend.createUser 'locke', $scope.username, $scope.password, (err) ->
-      if err
-        $scope.error = err
-      else
-        backend.sendValidation 'locke', $scope.username, (err) ->
-          if err
-            $scope.error = err
-          else
-            humane.log 'User created. Please go to your inbox and follow the instructions before proceeding', ->
-              $location.path "/login"
+    username = $scope.username
+    password = $scope.password
+
+    backend.createUser {
+      app: 'locke'
+      email: username
+      password: password
+    }, (err) ->
+      if err?
+        $scope.error = if err.data? then err.data else err
+        return
+
+      backend.sendValidation {
+        app: 'locke'
+        email: username
+      }, (err) ->
+        if err?
+          $scope.error = err
+          return
+
+        backend.login 'locke', username, password, (err) ->
+          # hantera err
+          console.log err
+          $location.path "/apps"
