@@ -21,7 +21,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "deploy": "bucketful",
+    "deploy": "rm -r public/.code && bucketful",
     "test": "coffee tests/acceptance.coffee",
     "start": "opra -p 4000 -r public -n public/index.html"
   }
