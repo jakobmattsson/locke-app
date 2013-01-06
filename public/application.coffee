@@ -91,8 +91,17 @@ module.factory 'backend', newArray '$rootScope', '$timeout', '$location', ($root
 
 
 
-# Routing
+# Views and Routing
 # =============================================================================
+
+getView = (name) ->
+  matches = _(document.getElementsByTagName('script')).toArray().filter (x) ->
+    x.getAttribute("data-path") == name
+
+  if matches.length != 1
+    throw "fail"
+
+  matches[0].innerHTML
 
 exports.defCtrl = (path, template, resolver, controller) ->
   if !controller?
@@ -102,7 +111,8 @@ exports.defCtrl = (path, template, resolver, controller) ->
   module.config ($routeProvider) ->
     $routeProvider
     .when path,
-      templateUrl: template
+      # templateUrl: template
+      template: getView(template)
       controller: controller
       resolve: resolver
 

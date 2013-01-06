@@ -6,13 +6,13 @@
   "devDependencies": {
     "coffee-script": "1.4.0",
     "wd-sync": "1.0.0",
-    "bower": "0.6.5",
+    "bower": "0.6.8",
     "bucketful": "0.7.3",
     "opra": "0.12.1"
   },
   "bucketful": {
     "bucket": "www.lockeapp.com",
-    "include": [".code", "views"],
+    "include": [".code"],
     "opra": {
       "inline": false,
       "concat": true,
