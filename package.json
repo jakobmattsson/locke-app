@@ -7,7 +7,7 @@
     "coffee-script": "1.4.0",
     "wd-sync": "1.0.0",
     "bower": "0.6.8",
-    "bucketful": "0.7.3",
+    "bucketful": "0.8.1",
     "opra": "0.12.1"
   },
   "bucketful": {
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "deploy": "rm -r public/.code && bucketful",
+    "deploy": "rm -rf public/.code && bucketful",
     "test": "coffee tests/acceptance.coffee",
     "start": "opra -p 4000 -r public -n public/index.html"
   }
